@@ -10,6 +10,8 @@ may have moved code there.  Many features of Curio were simply
 higher-level modules implemented on top of an existing core and can be
 added back to your code without much effort. -- Dave
 
+08/19/2024 Export Connection class to help with type hinting.
+
 04/11/2024 Removed undocumented ProcessPool and ThreadPool names.
 
 04/11/2024 Removed block_in_thread().  This functionality can be

@@ -4,7 +4,7 @@
 # Python objects on a stream.  Compatible with the Connection class in the
 # multiprocessing module, but rewritten for a purely asynchronous runtime.
 
-__all__ = ['Channel']
+__all__ = ['Channel', 'Connection']
 
 # -- Standard Library
 
