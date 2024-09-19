@@ -634,4 +634,3 @@ class SocketStream(StreamBase):
         except errors.CancelledError as e:
             e.bytes_written = nwritten
             raise
-
