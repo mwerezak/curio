@@ -10,12 +10,13 @@ Curio is a coroutine-based library for concurrent systems programming.  No longe
 maintained as a PyPi project.  Latest version is available on GitHub. 
 """
 
+CURIO_VERSION = "1.6.1+cmat"
 
 setup(name="curio",
       description="Curio",
       long_description=long_description,
       license="BSD",
-      version="1.6",
+      version=CURIO_VERSION,
       author="David Beazley",
       author_email="dave@dabeaz.com",
       maintainer="David Beazley",
