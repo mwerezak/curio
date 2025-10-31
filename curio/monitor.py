@@ -125,7 +125,6 @@ class Monitor(object):
         '''
         Function to start the monitor
         '''
-        log.info('Starting Curio monitor at %s', self.address)
         self._closing = threading.Event()        
         self._ui_thread = threading.Thread(target=self.server, args=(), daemon=True)
         self._ui_thread.start()
@@ -142,6 +141,8 @@ class Monitor(object):
         # blocking indefinitaly on sock.accept()
         sock.settimeout(0.5)
         sock.bind(self.address)
+        self.address = sock.getsockname()
+        log.info('Starting Curio monitor at %s', self.address)
         sock.listen(1)
         with sock:
             while not self._closing.is_set():
