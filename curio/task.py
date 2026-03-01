@@ -416,8 +416,8 @@ class TaskGroup(object):
     def exceptions(self):
         if not self._joined:
             raise RuntimeError("Task group not yet terminated")
-        return [ task.exception for task in self.tasks ]
-        
+        return [ task.exception for task in self.tasks if task.exception is not None ]
+
     # Triggered on task completion. 
     async def _task_done(self, task):
         if task.daemon:
