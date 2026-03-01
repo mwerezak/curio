@@ -195,9 +195,13 @@ class UniversalQueueBase:
                 # If we're cancelled, but the future completes successfully anyways,
                 # we must arrange for the item to go back onto the queue.  Note:
                 # the Curio kernel cancels futures when _future_wait() is cancelled.
-                fut.add_done_callback(lambda f: self._put(f.result(), True) if not f.cancelled() else None)
+                fut.add_done_callback(lambda f: self._unget(f.result()) if not f.cancelled() else None)
                 raise
         return item
+
+    def _unget(self, item):
+        self._unget_item(item)
+        self._get_notify()
 
     # Asynchronous queue get (Asyncio)
     @asyncioable(get)
@@ -218,7 +222,7 @@ class UniversalQueueBase:
 
     # Put something on the queue or return a Future that must
     # be waited on before retrying.
-    def _put(self, item, requeue=False):
+    def _put(self, item):
         with self._mutex:
             # Critical section never blocks.
             if self.maxsize > 0 and len(self._queue) >= self.maxsize:
@@ -226,22 +230,13 @@ class UniversalQueueBase:
                 self._putters.append(fut)
                 return fut
 
-            if requeue:
-                # self._queue.appendleft(item)
-                self._unget_item(item)
-            else:
-                self._put_item(item)
-                # self._queue.append(item)
-                self._unfinished_tasks += 1
-                self._put_send()
+            self._put_item(item)
+            # self._queue.append(item)
+            self._unfinished_tasks += 1
+            self._put_send()
 
             # If there are any waiters. Wake one of them and pop a queue item
-            while self._getters:
-                getter = self._getters.popleft()
-                if getter.cancelled():
-                    continue
-                getter.set_result(self._get_item())  # queue.popleft())
-                break
+            self._get_notify()
 
     # Synchronous put. For threads.
     def put(self, item):
@@ -274,6 +269,15 @@ class UniversalQueueBase:
             if not fut:
                 break
             await asyncio.wrap_future(fut)
+
+    # Wake any waiting getters
+    def _get_notify(self):
+        while self._getters:
+            getter = self._getters.popleft()
+            if getter.cancelled():
+                continue
+            getter.set_result(self._get_item())  # queue.popleft())
+            break
 
     def task_done_sync(self):
         with self._all_tasks_done:
