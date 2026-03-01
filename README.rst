@@ -8,13 +8,18 @@ well as some advanced features such as support for structured
 concurrency. It works on Unix and Windows and has zero dependencies.
 You'll find it to be familiar, small, fast, and fun.
 
-Important Notice: October 25, 2022
-----------------------------------
-The Curio project is no longer making package releases.  I'm more than
-happy to accept bug reports and may continue to work on it from time
-to time as the mood strikes.  If you want the absolute latest version, you
-should vendor the source code from here. Curio has no dependencies
-other than the Python standard library.  --Dave
+CMAT Fork
+---------
+On December 21, 2025, the development of the original curio source code
+at https://github.com/dabeaz/curio officially ceased and the repository
+was made read-only.
+
+Consequently, this fork will focus on continued development of curio in
+support of projects at CANMETMaterials that rely on the curio async
+runtime, and upstreaming/backwards compatibility will no longer be a
+consideration for future development efforts.
+
+For further information please contact Mike Werezak <mike.werezak@nrcan-rncan.gc.ca>.
 
 Curio is Different
 ------------------
