@@ -580,6 +580,23 @@ def test_uqueue_put_cancel(kernel):
 
     kernel.run(main)
 
+# See Issue: https://github.com/dabeaz/curio/issues/373
+def test_uqueue_put_after_get_cancel(kernel):
+    async def main():
+        queue = UniversalQueue()
+
+        task1 = await spawn(queue.get)
+        task2 = await spawn(queue.get)
+        await task1.cancel()
+
+        await queue.put(1)
+        await queue.put(2)
+
+        assert await task2.join() == 1
+        assert await queue.get() == 2
+
+    kernel.run(main)
+
 
 
 
