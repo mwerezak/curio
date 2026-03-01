@@ -213,6 +213,9 @@ The following methods and attributes are supported on a ``TaskGroup`` instance `
        exited with an exception. 
    * - ``g.exceptions``
      - A list of all exceptions collected by ``join()``.
+   * - ``g.exception_group``
+     - An ``ExceptionGroup`` containing all of the exceptions collected by ``join()``,
+       or ``None`` if there were no exceptions.
    * - ``g.tasks``
      - A list of all non-daemonic tasks managed by the group, ordered by task id.
        Does not include tasks where ``Task.join()`` or ``Task.cancel()``
