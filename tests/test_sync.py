@@ -694,6 +694,15 @@ class TestCondition:
 
         kernel.run(main)
 
+    # See <https://github.com/dabeaz/curio/issues/365>
+    def test_condition_notify_without_wait(self, kernel):
+        async def main():
+            c = Condition()
+            async with c:
+                await c.notify()
+
+        kernel.run(main)
+
 class TestUniversalEvent:
 
     def test_uevent_get_wait(self, kernel):
