@@ -19,8 +19,6 @@ support of projects at CANMETMaterials that rely on the curio async
 runtime, and upstreaming/backwards compatibility will no longer be a
 consideration for future development efforts.
 
-For further information please contact Mike Werezak <mike.werezak@nrcan-rncan.gc.ca>.
-
 Curio is Different
 ------------------
 One of the most important ideas from software architecture is the
