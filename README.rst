@@ -12,12 +12,9 @@ CMAT Fork
 ---------
 On December 21, 2025, the development of the original curio source code
 at https://github.com/dabeaz/curio officially ceased and the repository
-was made read-only.
-
-Consequently, this fork will focus on continued development of curio in
-support of projects at CANMETMaterials that rely on the curio async
-runtime, and upstreaming/backwards compatibility will no longer be a
-consideration for future development efforts.
+was made read-only. Consequently, this fork will focus on the continued
+development of curio in support of projects at CANMETMaterials that rely
+on the curio async runtime.
 
 Curio is Different
 ------------------
