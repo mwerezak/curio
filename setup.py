@@ -1,7 +1,4 @@
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 tests_require = ['pytest', 'Sphinx']
 
@@ -10,7 +7,7 @@ Curio is a coroutine-based library for concurrent systems programming.  No longe
 maintained as a PyPi project.  Latest version is available on GitHub. 
 """
 
-CURIO_VERSION = "1.6.2+cmat"
+CURIO_VERSION = "2.0.dev0"
 
 setup(name="curio",
       description="Curio",
@@ -19,15 +16,15 @@ setup(name="curio",
       version=CURIO_VERSION,
       author="David Beazley",
       author_email="dave@dabeaz.com",
-      maintainer="David Beazley",
-      maintainer_email="dave@dabeaz.com",
-      url="https://github.com/dabeaz/curio",
+      maintainer="Mike Werezak",
+      maintainer_email="mike.werezak@nrcan-rncan.gc.ca",
+      url="https://gitlab.com/cmat-mechatronics/curio",
       packages=['curio'],
       tests_require=tests_require,
       extras_require={
           'test': tests_require,
       },
-      python_requires='>= 3.7',
+      python_requires='>= 3.12',
       # This is disabled because it often causes interference with other testing
       # plugins people have written.  Curio doesn't use it for it's own testing.
       # entry_points={"pytest11": ["curio = curio.pytest_plugin"]},
