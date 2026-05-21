@@ -135,8 +135,9 @@ class _TimeoutAfter(object):
 async def _timeout_after_func(clock, coro, args,
                               ignore=False, timeout_result=None):
     coro = meta.instantiate_coroutine(coro, *args)
-    async with _TimeoutAfter(clock, ignore=ignore, timeout_result=timeout_result):
+    async with _TimeoutAfter(clock, ignore=ignore, timeout_result=timeout_result) as s:
         return await coro
+    return s.result
 
 def timeout_after(seconds, coro=None, *args):
     '''
